@@ -106,6 +106,16 @@ type Point struct {
 	Y float64 `json:"y"`
 }
 
+/*
+<html>
+<head><title>413 Request Entity Too Large</title></head>
+<body bgcolor="white">
+<center><h1>413 Request Entity Too Large</h1></center>
+<hr><center>nginx/1.1.19</center>
+</body>
+</html>
+*/
+
 func (fc *FaceClient) DetectImg(imgPath string) (sessionId string, faces []*Face, img *Img, err error) {
 	file, err := os.Open(imgPath)
 	if err != nil {
@@ -134,7 +144,7 @@ func (fc *FaceClient) DetectImg(imgPath string) (sessionId string, faces []*Face
 	if err != nil {
 		return
 	}
-	fmt.Printf("Response status code: %d", resp.StatusCode)
+	fmt.Printf("Response status code: %d \n", resp.StatusCode)
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
